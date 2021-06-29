@@ -71,7 +71,7 @@
 
 .header_titles h2 {
   font-size: 1em;
-  padding: 0.25em;
+  padding: 0.5em;
 }
 
 button {
@@ -79,6 +79,13 @@ button {
   flex: 1 1 0;
   border: none;
   margin: 5px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
+}
+
+button:hover {
+  opacity: 50%;
+  cursor: pointer;
 }
 
 #curiosity_button {

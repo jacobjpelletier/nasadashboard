@@ -8,21 +8,30 @@
     <link href="./assets/stylesheets/index.css" rel="stylesheet">
     <link href="./assets/stylesheets/resets.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/8e43ebad25.js" crossorigin="anonymous"></script>
-    <script src="/client.js"></script>
+    <!--<script src="client.js"></script>-->
+    <script src="typewriter.js"></script>
     <title>Document</title>
 </head>
 
 <body class="container">
     <div class="header">
         <div class="header_titles">
-            <h1 class="header_titles_main"><span class="bold">MM</span> <i class="fas fa-space-shuttle"></i> Mission:Mars</h1>
-            <h2 class="header_titles_sub1">Click on a tab to see Nasa images from Mars rovers!</h2>
+            <h1 class="header_titles_main">
+                <i class="fas fa-space-shuttle"></i>
+                <span
+                        class="txt-type",
+                        data-wait="3000",
+                        data-words='["Mission: Mars", "Data From NASA APIs",
+                        "An Udacity Project", "by Jacob Pelletier"]'
+                ></span>
+            </h1>
+            <h2 class="header_titles_sub1">Click on a tab to fetch data from NASA!</h2>
         </div>
         <nav class="header_navbar">
-            <button id="weather_button">Mars Weather</button>
-            <button id="curiosity_button">Curiosity Rover</button>
-            <button id="opportunity_button">Opportunity Rover</button>
-            <button id="spirit_button">Spirit Rover</button>
+            <button id="weather_button"><span class="bold">Mars Weather</span></button>
+            <button id="curiosity_button"><span class="bold">Curiosity Rover</span></button>
+            <button id="opportunity_button"><span class="bold">Opportunity Rover</span></button>
+            <button id="spirit_button"><span class="bold">Spirit Rover</span></button>
         </nav>
     </div>
     <main class="root">
