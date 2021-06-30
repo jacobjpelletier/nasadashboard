@@ -1,3 +1,4 @@
+console.log("running. . .");
 let store = {
     user: { name: "Student" },
     apod: '',
@@ -5,7 +6,7 @@ let store = {
 }
 
 // add our markup to the page
-const root = document.getElementById('root')
+const root = document.getElementById('root');
 
 const updateStore = (store, newState) => {
     store = Object.assign(store, newState)
@@ -36,7 +37,6 @@ const App = (state) => {
                     explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
                     but generally help with discoverability of relevant imagery.
                 </p>
-                ${ImageOfTheDay(apod)}
             </section>
         </main>
         <footer></footer>
@@ -92,7 +92,7 @@ const ImageOfTheDay = (apod) => {
 }
 
 // ------------------------------------------------------  API CALLS
-
+/*
 // Example API call
 const getImageOfTheDay = (state) => {
     let { apod } = state
@@ -102,4 +102,4 @@ const getImageOfTheDay = (state) => {
         .then(apod => updateStore(store, { apod }))
 
     return data
-}
+}*/
