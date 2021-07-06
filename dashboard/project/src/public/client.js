@@ -38,7 +38,7 @@ const render = async (root, state) => {
 // create content
 const App = (state) => {
     let { rovers, apod } = state
-
+    console.log(apod)
     return `
         <header></header>
         <main>
@@ -47,7 +47,8 @@ const App = (state) => {
                 <h3>Put things on the page!</h3>
                 <p>Here is an example section.</p>
                 <p>
-                    ADD WEATHER HERE:
+                    ${ImageOfTheDay(store.apod)}
+                    <img src="${getApod()}" height="350px" width="100%" />
                 </p>
             </section>
         </main>
@@ -55,6 +56,11 @@ const App = (state) => {
     `
 }
 
+const getApod = () => {
+    let data = store.apod.image.latest_photos[0].img_src
+   console.log(data);
+   return data
+}
 // listening for load event because page should load before any JS is called
 window.addEventListener('load', () => {
     render(root, store)
@@ -68,6 +74,8 @@ for (let rover_button of rover_buttons) {
     rover_button.onclick = function() {
         store.selected_rover = rover_button.id;
         console.log(store.selected_rover);
+        // Make request
+        // Populate image
     }
 }
 
@@ -118,10 +126,11 @@ const ImageOfTheDay = (apod) => {
 // Example API call
 const getImageOfTheDay = (state) => {
     let { apod } = state
-
-    fetch(`http://localhost:3000/apod`)
+    console.log("Here")
+    let data = fetch(`http://localhost:3000/apod`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }))
-
+    console.log(data)
     return data
+    // return data
 }
