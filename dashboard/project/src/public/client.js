@@ -72,7 +72,8 @@ const rover_buttons = document.querySelectorAll('button');
 
 for (let rover_button of rover_buttons) {
     rover_button.onclick = function() {
-        store.selected_rover = rover_button.id;
+        // store.selected_rover = rover_button.id;
+        updateStore(store, { selected_rover : rover_button.id })
         console.log(store.selected_rover);
         // Make request
         // Populate image
@@ -125,12 +126,16 @@ const ImageOfTheDay = (apod) => {
 
 // Example API call
 const getImageOfTheDay = (state) => {
+    console.log(`Butt ${state.selected_rover}`);
     let { apod } = state
     console.log("Here")
-    let data = fetch(`http://localhost:3000/apod`)
+    let data = fetch(`http://localhost:3000/${state.selected_rover}`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }))
     console.log(data)
+
     return data
     // return data
+
 }
+
