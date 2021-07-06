@@ -1,13 +1,30 @@
 console.log("running. . .");
+/** Store data **/
+/* This object called store will store data required for the working of this page
+   https://knowledge.udacity.com/questions/333825
+*  1. 'user' is an object with one key:value pair name, where name is a string of the user's name
+*  2. 'apod' AKA Astronomy picture of the day is a route with which to call API data with
+*     a. when data is fetched from server, aka index.js --> API, update store function is responsible for recalling
+*     render function, so that the new data will appear on the screen.
+*     b. TODO:
+*         - create item about info of the current selected rover
+*         - an item to hold array of the recent photos of the selected rover and the date of photo
+*  Store therefore contains the data necssary to render the page
+* */
 let store = {
     user: { name: "Student" },
     apod: '',
     rovers: ['Curiosity', 'Opportunity', 'Spirit'],
 }
 
-// add our markup to the page
+/** Add markup to page **/
+/* get root element of document. this element will contain images and data from API calls */
 const root = document.getElementById('root');
 
+/* This function is called updateStore
+*  Input: the store object
+*
+*  */
 const updateStore = (store, newState) => {
     store = Object.assign(store, newState)
     render(root, store)
@@ -92,7 +109,7 @@ const ImageOfTheDay = (apod) => {
 }
 
 // ------------------------------------------------------  API CALLS
-/*
+
 // Example API call
 const getImageOfTheDay = (state) => {
     let { apod } = state
@@ -102,4 +119,4 @@ const getImageOfTheDay = (state) => {
         .then(apod => updateStore(store, { apod }))
 
     return data
-}*/
+}
