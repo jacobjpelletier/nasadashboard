@@ -14,7 +14,7 @@ console.log("running. . .");
 let store = {
     user: { name: "Student" },
     apod: '',
-    rovers: ['Curiosity', 'Opportunity', 'Spirit'],
+    selected_rover: '',
 }
 
 /** Add markup to page **/
@@ -31,7 +31,7 @@ const updateStore = (store, newState) => {
 }
 
 const render = async (root, state) => {
-    root.innerHTML = App(state)
+    root.innerHTML = App(state);
 }
 
 
@@ -47,12 +47,7 @@ const App = (state) => {
                 <h3>Put things on the page!</h3>
                 <p>Here is an example section.</p>
                 <p>
-                    One of the most popular websites at NASA is the Astronomy Picture of the Day. In fact, this website is one of
-                    the most popular websites across all federal agencies. It has the popular appeal of a Justin Bieber video.
-                    This endpoint structures the APOD imagery and associated metadata so that it can be repurposed for other
-                    applications. In addition, if the concept_tags parameter is set to True, then keywords derived from the image
-                    explanation are returned. These keywords could be used as auto-generated hashtags for twitter or instagram feeds;
-                    but generally help with discoverability of relevant imagery.
+                    ADD WEATHER HERE:
                 </p>
             </section>
         </main>
@@ -67,6 +62,16 @@ window.addEventListener('load', () => {
 
 // ------------------------------------------------------  COMPONENTS
 
+const rover_buttons = document.querySelectorAll('button');
+
+for (let rover_button of rover_buttons) {
+    rover_button.onclick = function() {
+        store.selected_rover = rover_button.id;
+        console.log(store.selected_rover);
+    }
+}
+
+
 // Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
 const Greeting = (name) => {
     if (name) {
@@ -80,7 +85,7 @@ const Greeting = (name) => {
     `
 }
 
-// Example of a pure function that renders infomation requested from the backend
+// Example of a pure function that renders information requested from the backend
 const ImageOfTheDay = (apod) => {
 
     // If image does not already exist, or it is not from today -- request it again
