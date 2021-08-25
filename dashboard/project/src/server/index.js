@@ -76,6 +76,8 @@ app.get('/:name', async (req, res) => {
     * - thus, req.query.name will return the name of the rover
     * */
     const name = req.query.name; // from starter code
+    console.log(name);
+    console.log("poop");
     let date, url; // from starter code
     /*
     * this try catch clause will try to get photos of the selected rover using the API key found in env, return an err otherwise
