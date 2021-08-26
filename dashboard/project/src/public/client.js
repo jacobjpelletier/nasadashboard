@@ -1,3 +1,10 @@
+/*
+TODO:
+    1. iterate over API data to add photos to DOM
+    2. pass 'selected rover' to API
+
+ */
+
 console.log("running. . .");
 /** Store data **/
 /* This object called store will store data required for the working of this page
@@ -21,6 +28,23 @@ let store = {
 /* get root element of document. this element will contain images and data from API calls */
 const root = document.getElementById('root');
 
+// selector buttons for rovers
+const rover_buttons = document.querySelectorAll('button');
+
+// add listener for click to each button.
+// such that, when each button is clicked, the selected rover of object store is then updated.
+for (let rover_button of rover_buttons) {
+    rover_button.onclick = function() {
+        // store.selected_rover = rover_button.id;
+        updateStore(store, { selected_rover : rover_button.id })
+        console.log(store.selected_rover);
+        /* API call happens here!!! */
+        getAPIData(store);
+        // Make request
+        // Populate image
+    }
+}
+
 /* Called by for loop; called when a button is clicked
 *  Input: the store object, selected rover id from button clicked
 *  Output: will call render to update HTML
@@ -40,6 +64,7 @@ const render = async (root, state) => {
 
 
 /* Called by render
+ * Calls getLatestPhotosObject
  * Input: current state (some store object)
  * Output: puts filler dom with html, uses getApod
  */
@@ -76,24 +101,6 @@ window.addEventListener('load', () => {
 
 // ------------------------------------------------------  COMPONENTS
 
-// selector buttons for rovers
-const rover_buttons = document.querySelectorAll('button');
-
-// add listener for click to each button.
-// such that, when each button is clicked, the selected rover of object store is then updated.
-for (let rover_button of rover_buttons) {
-    rover_button.onclick = function() {
-        // store.selected_rover = rover_button.id;
-        updateStore(store, { selected_rover : rover_button.id })
-        console.log(store.selected_rover);
-        /* API call happens here!!! */
-        getAPIData(store);
-        // Make request
-        // Populate image
-    }
-}
-
-
 // Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
 const Greeting = (name) => {
     if (name) {
@@ -117,7 +124,15 @@ const getLatestPhotosObject = (apod) => {
         `)
     } else {
         let data = store.apod.image.latest_photos;
-        return getImageAndDesc(data[1]);
+        // let data = store.apod.image;
+        // console.log(data);
+        console.log(data);
+        // return getImageAndDesc(data[1]);
+        // return getImageAndDesc(data);
+        data.forEach(photo => {
+            //console.log(photo);
+            return getImageAndDesc(photo);
+        });
     }
 }
 
@@ -134,15 +149,15 @@ const getImageAndDesc = (data) => {
 // ------------------------------------------------------  API CALLS
 
 // Called by for loop - occurs whenever a rover is selected
-// Called
+// In turn this function called update store
 const getAPIData = (state) => {
-    console.log(`Butts ${state.selected_rover}`);
+    // console.log(`Butts ${state.selected_rover}`);
     // let { apod } = state
     let data = fetch(`http://localhost:3000/${state.selected_rover}`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }));
-    console.log(data);
-    console.log(store.apod.image.latest_photos);
+    // console.log(data);
+
 
     //return data
 
