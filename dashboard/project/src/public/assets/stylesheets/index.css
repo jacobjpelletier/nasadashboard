@@ -4,10 +4,10 @@
   /* Display */
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 500px 500px 1fr;
+  grid-template-rows: 400px 200px 1fr;
   gap: 0px 0px;
   grid-template-areas:
-    "content_header"
+    "header"
     "root"
     "loadAPIDataHere";
   min-height: 100vh;
@@ -63,6 +63,10 @@
   margin: 5px;
 }
 
+.loadAPIDataHere {
+
+}
+
 .bold {
   font-weight: bold;
 }
@@ -78,7 +82,7 @@
 }
 
 button {
-  min-height: 200px;
+  min-height: 300px;
   flex: 1 1 0;
   border: none;
   margin: 5px;

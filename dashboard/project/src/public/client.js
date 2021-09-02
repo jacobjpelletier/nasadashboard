@@ -76,10 +76,8 @@ const App = (state) => {
     return `
         <header></header>
         <main>
-            ${Greeting(store.user.name)}
             <section>
-                <div id="Directions">Put things on the page!</div>
-                <div id="Data">${getLatestPhotosObject(store.apod)}</div>
+                ${getLatestPhotosObject(store.apod)}
             </section>
         </main>
         <footer></footer>
@@ -100,19 +98,6 @@ window.addEventListener('load', () => {
 })
 
 // ------------------------------------------------------  COMPONENTS
-
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
-const Greeting = (name) => {
-    if (name) {
-        return `
-            <h1>Welcome, ${name}!</h1>
-        `
-    }
-    return `
-        <h1>Hello!</h1>
-    `
-}
-
 // Example of a pure function that renders information requested from the backend
 const getLatestPhotosObject = (apod) => {
 
