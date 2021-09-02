@@ -31,6 +31,9 @@ const root = document.getElementById('root');
 // selector buttons for rovers
 const rover_buttons = document.querySelectorAll('button');
 
+// this string will store html data (as a string) which can be appended to DOM with innerHTML
+let APIToHTML = "";
+
 // add listener for click to each button.
 // such that, when each button is clicked, the selected rover of object store is then updated.
 for (let rover_button of rover_buttons) {
@@ -75,11 +78,8 @@ const App = (state) => {
         <main>
             ${Greeting(store.user.name)}
             <section>
-                <h3>Put things on the page!</h3>
-                <p>Here is an example section.</p>
-                <p>
-                    ${getLatestPhotosObject(store.apod)}
-                </p>
+                <div id="Directions">Put things on the page!</div>
+                <div id="Data">${getLatestPhotosObject(store.apod)}</div>
             </section>
         </main>
         <footer></footer>
@@ -124,26 +124,21 @@ const getLatestPhotosObject = (apod) => {
         `)
     } else {
         let data = store.apod.image.latest_photos;
-        // let data = store.apod.image;
         // console.log(data);
-        console.log(data);
-        // return getImageAndDesc(data[1]);
-        // return getImageAndDesc(data);
         data.forEach(photo => {
-            //console.log(photo);
-            return getImageAndDesc(photo);
+            /* add current rover photo data to the string APIToHTML */
+            // add photo image
+            APIToHTML += `<img src="${photo.img_src}" height="350px" width="100%" />`;
+            // add photo description
+            APIToHTML += `<p>Rover: ${photo.rover.name} <br> Landing Date: ${photo.rover.landing_date} <br>
+            Camera: ${photo.camera.full_name} <br> Taken on Sol: ${photo.sol}</p><hr>
+            `;
         });
+        return APIToHTML;
     }
 }
 
-const getImageAndDesc = (data) => {
-    return (`
-            <img src="${data.img_src}" height="350px" width="100%" />
-            <p>Rover: ${data.rover.name} <br> Landing Date: ${data.rover.landing_date} <br>
-            Camera: ${data.camera.full_name} <br> Taken on Sol: ${data.sol}
-            </p>
-    `)
-}
+
 
 
 // ------------------------------------------------------  API CALLS
