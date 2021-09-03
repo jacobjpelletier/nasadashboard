@@ -2,7 +2,6 @@
 TODO:
     1. iterate over API data to add photos to DOM
     2. pass 'selected rover' to API
-
  */
 
 console.log("running. . .");
@@ -28,25 +27,20 @@ let store = {
 /* get root element of document. this element will contain images and data from API calls */
 const root = document.getElementById('root');
 
-// selector buttons for rovers
+/* selector buttons for rovers */
 const rover_buttons = document.querySelectorAll('button');
 
-// this string will store html data (as a string) which can be appended to DOM with innerHTML
-let APIToHTML = "";
-
-// add listener for click to each button.
-// such that, when each button is clicked, the selected rover of object store is then updated.
-for (let rover_button of rover_buttons) {
-    rover_button.onclick = function() {
-        // store.selected_rover = rover_button.id;
-        updateStore(store, { selected_rover : rover_button.id })
-        console.log(store.selected_rover);
-        /* API call happens here!!! */
+/* add listener for click to each button.
+ * such that, when each button is clicked, the selected rover of object store is then updated.
+ */
+rover_buttons.forEach(rover => {
+    rover.onclick = function() {
+        // update store.selected_rover with the rover that is selected by the user
+        updateStore(store, { selected_rover : rover.id })
+        // when button is clicked, call for data from API
         getAPIData(store);
-        // Make request
-        // Populate image
     }
-}
+})
 
 /* Called by for loop; called when a button is clicked
 *  Input: the store object, selected rover id from button clicked
@@ -65,7 +59,6 @@ const render = async (root, state) => {
     root.innerHTML = App(state);
 }
 
-
 /* Called by render
  * Calls getLatestPhotosObject
  * Input: current state (some store object)
@@ -83,24 +76,23 @@ const App = (state) => {
         <footer></footer>
     `
 }
-/* for testing
-                    <!-- <img src="${getApod()}" height="350px" width="100%" /> --> // html
-const getApod = () => {
-    let data = store.apod.image.latest_photos[0].img_src
-    console.log(data);
-    return data
-}
-*/
 
-// listening for load event because page should load before any JS is called
+/* listening for load event because page should load before any JS is called */
 window.addEventListener('load', () => {
     render(root, store)
 })
 
 // ------------------------------------------------------  COMPONENTS
-// Example of a pure function that renders information requested from the backend
+/* Pure function that renders information requested from the backend
+ * Called by APP
+ * Input: store.apod
+ * Output: html with API data to populate id="loadAPIDataHere"
+ */
 const getLatestPhotosObject = (apod) => {
-
+    // upon initial load, apod will be blank until a button is clioked. this is to avoid console errors.
+    if (apod == ''){
+        return "<h2>Click any rover to see that rover\'s photos from Mars. . .</h2>";
+    }
     // check if the photo of the day is actually type video!
     if (apod.media_type === "video") {
         return (`
@@ -109,22 +101,21 @@ const getLatestPhotosObject = (apod) => {
         `)
     } else {
         let data = store.apod.image.latest_photos;
-        // console.log(data);
-        data.forEach(photo => {
-            /* add current rover photo data to the string APIToHTML */
-            // add photo image
-            APIToHTML += `<img src="${photo.img_src}" height="350px" width="100%" />`;
-            // add photo description
-            APIToHTML += `<p>Rover: ${photo.rover.name} <br> Landing Date: ${photo.rover.landing_date} <br>
-            Camera: ${photo.camera.full_name} <br> Taken on Sol: ${photo.sol}</p><hr>
+        /* !!! check if I hit my API rate limit here */
+        // console.log(store.apod.image);
+        const APITToData = data.map(photo => {
+            return `<img src="${photo.img_src}" height="350px" width="100%" />
+                    <p>Rover: ${photo.rover.name}</p>
+                    <p>Rover Status: ${photo.rover.status}</p>
+                    <p>Launcg Date: ${photo.rover.launch_date}</p>
+                    <p>Landing Date: ${photo.rover.landing_date}</p>
+                    <p>Camera: ${photo.camera.full_name}</p> 
+                    <p>Taken on Sol: ${photo.sol}</p>
             `;
-        });
-        return APIToHTML;
+        })
+        return APITToData;
     }
 }
-
-
-
 
 // ------------------------------------------------------  API CALLS
 
@@ -136,10 +127,4 @@ const getAPIData = (state) => {
     let data = fetch(`http://localhost:3000/${state.selected_rover}`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }));
-    // console.log(data);
-
-
-    //return data
-
 }
-
