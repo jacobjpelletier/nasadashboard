@@ -4,7 +4,6 @@ TODO:
     2. pass 'selected rover' to API
  */
 
-console.log("running. . .");
 /** Store data **/
 /* This object called store will store data required for the working of this page
    https://knowledge.udacity.com/questions/333825

@@ -81,13 +81,19 @@
   padding: 0.5em;
 }
 
-button {
+form {
   min-height: 300px;
   flex: 1 1 0;
   border: none;
   margin: 5px;
   font-family: 'Lato', sans-serif;
   font-size: 1.5em;
+}
+
+button {
+  height: 100%;
+  width: 100%;
+  font-size: larger;
 }
 
 button:hover {

@@ -77,7 +77,7 @@ app.get('/:name', async (req, res) => {
     * */
     const name = req.query.name; // from starter code
     console.log(name);
-    // console.log("poop");
+    console.log("poop");
     let date, url; // from starter code
     /*
     * this try catch clause will try to get photos of the selected rover using the API key found in env, return an err otherwise
@@ -85,13 +85,12 @@ app.get('/:name', async (req, res) => {
     * */
     // ${name.toLowerCase()}
     try {
-        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${process.env.API_KEY}`)
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/latest_photos?api_key=${process.env.API_KEY}`)
             .then(res => res.json());
         res.send({ image })
     } catch (err) {
         console.log('error:', err);
     }
-    console.log(store.selected_rover);
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
