@@ -24,13 +24,15 @@ const fetch = require('node-fetch')
 * */
 const path = require('path')
 
+// use immutableJS here
+const Immutable = require('immutable');
+const map1 = Immutable.Map({ port: "3000" });
+
 /** variables
  * https://expressjs.com/en/starter/hello-world.html
  * **/
 /* start a server called app at root URL /*/
 const app = express()
-/* listen on port 3000 */
-const port = 3000
 
 /** middlware
  *  https://stackoverflow.com/questions/55558402/what-is-the-meaning-of-bodyparser-urlencoded-extended-true-and-bodypar
@@ -92,4 +94,5 @@ app.get('/:name', async (req, res) => {
     console.log(store.selected_rover);
 })
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+// Immutable JS object used here
+app.listen(map1.get('port'), () => console.log(`Example app listening on port ${map1.get('port')}!`))

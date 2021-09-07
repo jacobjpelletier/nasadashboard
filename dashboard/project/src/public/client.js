@@ -5,6 +5,11 @@ TODO:
  */
 
 console.log("running. . .");
+
+/* Project requirement: use immutable. imported here
+ * Will use to instantiate immutable objects.
+ */
+
 /** Store data **/
 /* This object called store will store data required for the working of this page
    https://knowledge.udacity.com/questions/333825
@@ -17,8 +22,10 @@ console.log("running. . .");
 *         - an item to hold array of the recent photos of the selected rover and the date of photo
 *  Store therefore contains the data necssary to render the page
 * */
+// use immutableJSn here
+
 let store = {
-    user: { name: "Student" },
+    user: 'Student',
     apod: '',
     selected_rover: '',
 }
@@ -65,11 +72,10 @@ const render = async (root, state) => {
  * Output: puts filler dom with html, uses getApod
  */
 const App = (state) => {
-    let { rovers, apod } = state
     return `
         <header></header>
         <main>
-            <section id="flex_data">
+            <section>
                 ${getLatestPhotosObject(store.apod)}
             </section>
         </main>
@@ -111,6 +117,7 @@ const getLatestPhotosObject = (apod) => {
                     <p>Landing Date: ${photo.rover.landing_date}</p>
                     <p>Camera: ${photo.camera.full_name}</p> 
                     <p>Taken on Sol: ${photo.sol}</p>
+                    <p>Picture ID: ${photo.id}</p>
                     `;
         })
         console.log(data);
@@ -123,8 +130,6 @@ const getLatestPhotosObject = (apod) => {
 // Called by for loop - occurs whenever a rover is selected
 // In turn this function called update store
 const getAPIData = (state) => {
-    // console.log(`Butts ${state.selected_rover}`);
-    // let { apod } = state
     let data = fetch(`http://localhost:3000/${state.selected_rover}`)
         .then(res => res.json())
         .then(apod => updateStore(store, { apod }));
