@@ -75,22 +75,21 @@ app.get('/:name', async (req, res) => {
     * - req.query is also an object but containes only key values
     * - thus, req.query.name will return the name of the rover
     * */
-    const name = req.query.name; // from starter code
-    console.log(name);
-    console.log("poop");
-    let date, url; // from starter code
+    console.log(req.query); // print to log for debugs
+    console.log(req.params); // print to log for debugs
     /*
     * this try catch clause will try to get photos of the selected rover using the API key found in env, return an err otherwise
     * - save API data as image -- which may be an object containing many images
     * */
     // ${name.toLowerCase()}
     try {
-        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/latest_photos?api_key=${process.env.API_KEY}`)
+        let image = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/${req.params.name}/latest_photos?api_key=${process.env.API_KEY}`)
             .then(res => res.json());
         res.send({ image })
     } catch (err) {
         console.log('error:', err);
     }
+    console.log(store.selected_rover);
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

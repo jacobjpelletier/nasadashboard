@@ -4,6 +4,7 @@ TODO:
     2. pass 'selected rover' to API
  */
 
+console.log("running. . .");
 /** Store data **/
 /* This object called store will store data required for the working of this page
    https://knowledge.udacity.com/questions/333825
@@ -68,7 +69,7 @@ const App = (state) => {
     return `
         <header></header>
         <main>
-            <section>
+            <section id="flex_data">
                 ${getLatestPhotosObject(store.apod)}
             </section>
         </main>
@@ -88,7 +89,7 @@ window.addEventListener('load', () => {
  * Output: html with API data to populate id="loadAPIDataHere"
  */
 const getLatestPhotosObject = (apod) => {
-    // upon initial load, apod will be blank until a button is clioked. this is to avoid console errors.
+    // upon initial load, apod will be blank until a button is clicked. this is to avoid console errors.
     if (apod == ''){
         return "<h2>Click any rover to see that rover\'s photos from Mars. . .</h2>";
     }
@@ -103,15 +104,16 @@ const getLatestPhotosObject = (apod) => {
         /* !!! check if I hit my API rate limit here */
         // console.log(store.apod.image);
         const APITToData = data.map(photo => {
-            return `<img src="${photo.img_src}" height="350px" width="100%" />
+            return `<img src="${photo.img_src}" height="100%" width="100%"/>
                     <p>Rover: ${photo.rover.name}</p>
                     <p>Rover Status: ${photo.rover.status}</p>
                     <p>Launcg Date: ${photo.rover.launch_date}</p>
                     <p>Landing Date: ${photo.rover.landing_date}</p>
                     <p>Camera: ${photo.camera.full_name}</p> 
                     <p>Taken on Sol: ${photo.sol}</p>
-            `;
+                    `;
         })
+        console.log(data);
         return APITToData;
     }
 }

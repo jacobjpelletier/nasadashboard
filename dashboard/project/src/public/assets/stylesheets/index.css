@@ -63,11 +63,7 @@
   margin: 5px;
 }
 
-.loadAPIDataHere {
-
-}
-
-.bold {
+#bold {
   font-weight: bold;
 }
 
@@ -81,19 +77,13 @@
   padding: 0.5em;
 }
 
-form {
+button {
   min-height: 300px;
   flex: 1 1 0;
   border: none;
   margin: 5px;
   font-family: 'Lato', sans-serif;
   font-size: 1.5em;
-}
-
-button {
-  height: 100%;
-  width: 100%;
-  font-size: larger;
 }
 
 button:hover {
@@ -128,6 +118,7 @@ button:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+
 /* -------------------  TABLET  --------------------- */
 @media (min-width: 768px) {
   button {
