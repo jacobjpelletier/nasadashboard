@@ -14,18 +14,4 @@ error: FetchError: invalid json response body at https://api.nasa.gov/mars-photo
 {}
 { name: 'spirit' }
 {}
-{ name: 'favicon.ico' }
-error: FetchError: invalid json response body at https://api.nasa.gov/mars-photos/api/v1/rovers/favicon.ico/latest_photos?api_key=7faaFUxEmh9SuNFJq7B4mcQRdBfc3kUEwG2YHsTz reason: Unexpected end of JSON input
-    at /Users/jacobpelletier/Desktop/projects/nasadashboard/dashboard/project/node_modules/node-fetch/lib/index.js:272:32
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)
-    at async /Users/jacobpelletier/Desktop/projects/nasadashboard/dashboard/project/src/server/index.js:88:21 {
-  type: 'invalid-json'
-}
-{}
-{ name: 'curiosity' }
-{}
-{ name: 'opportunity' }
-{}
-{ name: 'spirit' }
-{}
 { name: 'curiosity' }
