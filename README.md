@@ -1,5 +1,5 @@
 # nasadashboard
-## navigate to project directory
+## navigate to 'project' directory
 
 # Functional Programming with Javascript
 
